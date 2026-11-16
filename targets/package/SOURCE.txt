@@ -1,0 +1,30 @@
+# Copyright (C) 2026 Marsupial Solutions LLC
+# SPDX-License-Identifier: GPL-3.0-or-later
+# The players' package: source/SOURCE.txt, written by targets/pc/pc_package.py. @VERSION@ is the package's version.
+#---- everything below this line goes into the package
+Sources in this folder
+
+tcc-0.9.27.tar.bz2: the full source of TinyCC 0.9.27, as its project publishes it, from which
+the TinyCC in tools\tcc was built (GNU Lesser General Public License, version 2.1; parts of its
+runtime library are under the licences NOTICES.txt names).
+
+pc_tinycc.py: our script that built tools\tcc from that archive, with gcc (MSYS2's mingw-w64
+build). It follows the archive's own win32\build-tcc.bat for 64-bit Windows; its first lines say
+each step and what is left out. To build TinyCC the same way:
+  python pc_tinycc.py tcc-0.9.27.tar.bz2 OUT_FOLDER --gcc PATH_TO_GCC
+
+sound_cores: the source files of the three sound chips' cores compiled into pc_port.exe, exactly
+as their authors publish them at the commits NOTICES.txt names, with their licences: z80 (chips
+z80.h, zlib), fm (Nuked-OPN2, LGPL-2.1-or-later), psg (Nuked-PSG, GPL-2.0-or-later).
+
+shaders: the three picture filter shaders built into pc_port.exe, exactly as their authors
+publish them, each with its own notice: crt-hyllian.glsl (MIT), crt-lottes.glsl (public domain)
+and crt-geom.glsl (GPL-2.0-or-later).
+
+The source of our own programs, the launcher, the game program, the boot tool, the translator and
+the runtime, is free software under the GNU General Public License, version 3 or later. The
+translator and the runtime's files in tools are their own source. The source of the three
+programs is published at github.com/thekoalakoa/paprium-pc, the repository this download is made
+from, at tag v@VERSION@. The firmware code built into the game program and the boot tool, and
+little_man_firmware.bin beside Paprium.exe, come from the firmware/ folder of
+github.com/thekoalakoa/paprium-pocket at tag v0.3.0 (see NOTICES.txt).

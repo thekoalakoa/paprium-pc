@@ -1,0 +1,19 @@
+# Copyright (C) 2026 Marsupial Solutions LLC
+# SPDX-License-Identifier: GPL-3.0-or-later
+# Nothing generated and nothing from the game belongs in this repository.
+out/
+gen/
+local*.json
+*.local.json
+*.md.rom
+*.bin
+*.gen
+*.smd
+*.srm
+*.sav
+*.exe
+*.dll
+*.o
+*.obj
+*.log
+__pycache__/

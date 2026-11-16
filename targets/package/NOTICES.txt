@@ -1,0 +1,156 @@
+# Copyright (C) 2026 Marsupial Solutions LLC
+# SPDX-License-Identifier: GPL-3.0-or-later
+# The players' package: NOTICES.txt, written by targets/pc/pc_package.py. @VERSION@ is the package's version, @FW@ the commit of the published
+# firmware/ folder whose files the programs are built from (pc_package.py --fw-commit).
+#---- everything below this line goes into the package
+Paprium on PC, version @VERSION@: notices
+
+WHAT THIS IS
+
+This folder holds no part of the game. On the player's PC, the launcher builds the game from the
+player's own copy of the game file and keeps it in the player's own app-data folder,
+%LOCALAPPDATA%\Paprium PC. In the words given, that output is
+"a Patch copy of the Legally obtained rom".
+
+Terms, as given:
+  "gpl would apply to everything but the games rom itself the output your tool makes would still be partially their ip and cannot be sold."
+  "sharing output is forbidden and not allowed just like sharing a rom"
+
+About the name Paprium, as given: "there is no affiliation and no commercial use."
+
+
+OUR CODE
+
+Copyright (C) 2026 Marsupial Solutions LLC.
+The launcher (Paprium.exe), the game program (pc_port.exe), the firmware's boot tool
+(tools\pc_boot_image.exe), the translator (tools\translator), the runtime's files (tools\rt) and
+the script that built TinyCC (source\pc_tinycc.py) are free software under the GNU General Public
+License, version 3 or (at your option) any later version. See licences\COPYING_GPL3.txt. They
+come with no warranty. The translator, the runtime's files and that script are their own source.
+See source\SOURCE.txt for the rest. The firmware's code in the two programs is built from the
+firmware/ folder of the Paprium core 0.3.0 for the Analogue Pocket, published with its source at
+github.com/thekoalakoa/paprium-pocket, tag v0.3.0 (commit @FW@).
+
+The Scum! cheats are switches in our own patch source, tools\translator\patches\patch_source.json:
+our own addresses and our own replacement words, as the Pocket core's Scum! menu has them. The
+arcade stage's start word was found by krikzz. The few instructions of the game a switch runs
+again are taken from the player's own game file when the game is built on the player's PC.
+
+Console Reset, Aspect Ratio, Arcade Mode, Arcade Coins, Attract Only, 3-Player Mode and the
+consoles and Mega CD units of the Console menu are our own code too, written by our team from our
+own study of how the cart behaves, with the Pocket core 0.3.0's menu as their model. The pads in
+the EA 4-Way Play's sockets answer the game as the Pocket core's pad model does: its file
+rtl/upstream/pad_io.sv, MegaDrive input implementation, Copyright (c) 2023 Alexey Melnikov, GNU
+General Public License, version 2 or (at your option) any later version, with our team's changes
+under version 3 or later. None of its text is in these programs.
+
+
+LITTLE-MAN FIRMWARE 1.0
+
+little_man_firmware.bin, beside Paprium.exe, is Little-Man Firmware 1.0, the firmware of the
+Paprium core 0.3.0 for the Analogue Pocket, byte for byte the public file of that core's 0.3.0
+release: MD5 f8cda67209d0e4d35beb077ae88fb16b, SHA-256
+6fb90204322c6a5596bfb4d3a743696cbdced5744cf8d4b9f09aa9fc322873e2. Copyright (C) 2026 Marsupial
+Solutions LLC. It is free software under the GNU General Public License, version 3 or (at your
+option) any later version, see licences\COPYING_GPL3.txt, and comes with no warranty. Its source
+is the firmware/ folder of github.com/thekoalakoa/paprium-pocket, tag v0.3.0 (commit @FW@). It
+carries the CPU MATE partner's brain, a reverse-engineered emulation of the game's CPU partner:
+with CPU MATE on, the game program reads the brain from that file (see READ_ME.txt) and keeps it
+only in memory.
+
+licences\THIRD_PARTY_NOTICES_firmware.md covers little_man_firmware.bin: the other projects'
+parts in it, with their notices and licence texts, are NEORV32's linker script, adapted
+(BSD-3-Clause), newlib's memcpy and memset (BSD-2-Clause), mega-ppm's code by krikzz
+(BSD-3-Clause; our changes GPL-3.0-or-later) and WavPack 4.0's tiny decoder by Conifer Software
+(BSD). Little-Man Firmware (trademark pending) is Marsupial Solutions LLC's name for this
+firmware.
+
+
+OTHER PROJECTS' CODE IN THIS FOLDER
+
+SDL2 (the window, the game controllers and the audio device), as SDL2.dll: zlib licence, see
+licences\SDL2_LICENSE.txt. Copyright (C) 1997-2024 Sam Lantinga.
+
+SDL_GameControllerDB, SDL's community controller database, as gamecontrollerdb.txt, unchanged
+from its commit c0f11d40 of 2026-11-09: the game program reads it to know pads SDL does not know
+itself. zlib licence, see licences\GAMECONTROLLERDB_LICENSE.txt. Copyright (C) 1997-2025 Sam
+Lantinga.
+
+mega-ppm, by krikzz: the firmware's command bodies and two headers. BSD-3-Clause for krikzz's code;
+our changes are GPL-3.0-or-later. Its notice and licence text are in
+licences\THIRD_PARTY_NOTICES_firmware.md, under "mega-ppm".
+
+WavPack 4.0 tiny decoder, Conifer Software: unpacks the game's sound bank once. BSD licence. Its
+notice and licence text are in licences\THIRD_PARTY_NOTICES_firmware.md, under "WavPack".
+
+chips z80.h, by Andre Weissflog (floooh): the Z80 the game's sound driver runs on, compiled into
+pc_port.exe from its author's file at commit 9e88298c. zlib licence, see licences\Z80_LICENSE.txt.
+
+Nuked-OPN2, by Alexey Khokholov (nukeykt): the YM2612 model, compiled into pc_port.exe from its
+author's source at commit 335747d7. GNU Lesser General Public License, version 2.1 or (at your
+option) any later version, see licences\NUKED_OPN2_LICENSE.txt. Its source is in
+source\sound_cores\fm.
+
+Nuked-PSG, by Alexey Khokholov (nukeykt): the PSG model, compiled into pc_port.exe from its
+author's source at commit d15a168c. GNU General Public License, version 2 or (at your option) any
+later version, see licences\NUKED_PSG_LICENSE.txt. Its source is in source\sound_cores\psg.
+
+Picture filters, the shaders pc_port.exe draws its CRT looks with (F6), built into it as their
+authors wrote them, from libretro's glsl-shaders collection; each file is in source\shaders with
+its notice:
+  crt-hyllian.glsl, Hyllian's CRT Shader, Copyright (C) 2011-2020 Hyllian. MIT licence, its text
+  in the file's head. Its colour masks are by hunterk, public domain.
+  crt-lottes.glsl, by Timothy Lottes: public domain.
+  crt-geom.glsl (CRT-interlaced), Copyright (C) 2010-2012 cgwg, Themaister and DOLLS. GNU General
+  Public License, version 2 or (at your option) any later version, see licences\COPYING_GPL2.txt.
+librashader, which runs a player's own RetroArch .slangp preset, is not in this folder. A player
+who adds librashader.dll beside pc_port.exe gets it under its own licence, the Mozilla Public
+License 2.0 (or GPL 3).
+
+The mingw-w64 C runtime and GCC's runtime, as compiled into the three programs and into TinyCC's
+tcc.exe and libtcc.dll. mingw-w64's terms are in licences\MINGW_RUNTIME_LICENSE.txt. GCC's
+runtime is under the GCC Runtime Library Exception, see licences\GCC_RUNTIME_LIBRARY_EXCEPTION.txt.
+
+THIRD_PARTY_NOTICES_firmware.md is the firmware's own notices file, copied as it stands, as it
+travels with little_man_firmware.bin (see LITTLE-MAN FIRMWARE 1.0). Of the parts it lists, the
+two programs built with the firmware's code, pc_port.exe and tools\pc_boot_image.exe, hold only
+mega-ppm's and WavPack's. They leave out mega-ppm's mame.c, and they hold no CPU MATE brain.
+
+
+TOOLS THE LAUNCHER USES ON THE PLAYER'S PC
+
+Python 3.12.10, the embeddable package for 64-bit Windows, by the Python Software Foundation, as
+published, in tools\python: it runs the translator. PSF License, with the notices of the parts it
+bundles, in licences\PYTHON_LICENSE.txt (also tools\python\LICENSE.txt).
+
+NumPy 2.5.3, as published, less its tests, its f2py tool, its documents and its type stubs, in
+tools\python\site: the translator's pointer scan uses it. BSD-3-Clause, see
+licences\NUMPY_LICENSE.txt; the licences of the libraries it bundles are in
+tools\python\site\numpy-2.5.3.dist-info\licenses. Its folder numpy.libs also holds msvcp140-*.dll,
+Microsoft's C++ runtime library, which NumPy's published wheel carries: Microsoft's redistributable
+code, passed on unchanged under Microsoft's terms for it.
+
+TinyCC (Tiny C Compiler) 0.9.27, by Fabrice Bellard and others, in tools\tcc: it compiles the
+translated game on the player's PC. We built it from its own source archive, which is in
+source\tcc-0.9.27.tar.bz2, with the script source\pc_tinycc.py: the steps of the archive's
+win32\build-tcc.bat for 64-bit Windows, with gcc compiling TinyCC; its 32-bit compiler, its
+examples and its documents are left out. GNU Lesser General Public License, version 2.1, see
+licences\TINYCC_COPYING.txt. Its runtime library (tools\tcc\lib\libtcc1-64.a), which TinyCC links
+into what it builds, holds parts under other terms: lib\libtcc1.c is under the GNU General Public
+License, version 2 or (at your option) any later version, with the exception written in that
+file, which allows its compiled form to be linked into other programs and those programs to be
+passed on with no restriction coming from that file; the licence's text is in
+licences\COPYING_GPL2.txt. lib\bcheck.c is under the GNU Lesser General Public License, version 2
+or (at your option) any later version. Besides TinyCC's own headers, its include folder holds the
+headers of mingw-w64 and mingw, which their authors placed in the public domain, as each of those
+files says, and include\tcc\tcc_libm.h, from musl, under the MIT licence written in that file.
+
+
+NOT IN THIS FOLDER
+
+No part of the game. No Genesis Plus GX code and no Musashi code. Nuked-MD and FX68K were run in
+simulation to measure how the chips behave; no code of theirs is in these programs.
+
+No Sega BIOS, no TMSS code and no 32X or Mega CD code. For the consoles and Mega CD units of the
+Console menu, the game program answers the game's own checks with only the few identification
+words and bits the game compares, as the Pocket core does.

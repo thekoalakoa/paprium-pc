@@ -1,0 +1,116 @@
+{
+ "copyright": "Copyright (C) 2026 Marsupial Solutions LLC",
+ "spdx": "GPL-3.0-or-later",
+ "format": 2,
+ "name": "patch source",
+ "about": "The Pocket core's Scum! cheats as switches a player turns on and off while the game runs (tool/patchsrc.py, format 2). The same sites, words and bits as the Pocket core's table (its menu entry Little-Man, values 1 Health, 2 Pills, 4 Lives), with the switch point where the Pocket core takes a new setting. Every site is checked against the player's ROM by a hash, and the instructions the health cave runs again are read from that ROM when the game is translated.",
+ "switches": [
+  {
+   "name": "health",
+   "bit": 1,
+   "about": "Players take no damage, and a player's throws do no damage to enemies, as on the Pocket."
+  },
+  {
+   "name": "pills",
+   "bit": 2,
+   "about": "Using a Blu pill (Down + A) does not spend one."
+  },
+  {
+   "name": "lives",
+   "bit": 4,
+   "about": "Dying does not spend a life."
+  }
+ ],
+ "hooks": [
+  {
+   "id": "health_compare",
+   "switch": "health",
+   "kind": "call",
+   "site": "0x02FAC4",
+   "length": 6,
+   "cave": "health",
+   "about": "The compare of an object's damage with its health: the health cave gives player objects zero damage, then runs the compare.",
+   "window": {
+    "offset": 0,
+    "length": 64,
+    "sha256": "f2e2865c8d76e9a55353a0e96ce29717d08679d9d743c72df06ee705e37e9cf1"
+   }
+  },
+  {
+   "id": "health_throws",
+   "switch": "health",
+   "kind": "skip",
+   "site": "0x030E8A",
+   "length": 4,
+   "about": "The health write of the game's throw-damage routine, which only throws and thrown bodies use.",
+   "window": {
+    "offset": 0,
+    "length": 64,
+    "sha256": "1f4cc1723dfaf1893e006c44694b69af9ea3d4ff5f7ddd42d8a9f2c0d46a8dd3"
+   }
+  },
+  {
+   "id": "pills",
+   "switch": "pills",
+   "kind": "skip",
+   "site": "0x01A9FA",
+   "length": 4,
+   "about": "The decrement of the player's Blu pill count.",
+   "window": {
+    "offset": 0,
+    "length": 64,
+    "sha256": "29a7ed339ac3d7c3e98d7508771db626211304d57c9aadd231e3497ac045d913"
+   }
+  },
+  {
+   "id": "lives",
+   "switch": "lives",
+   "kind": "skip",
+   "site": "0x02A4EE",
+   "length": 2,
+   "about": "The decrement of the player's life count.",
+   "window": {
+    "offset": 0,
+    "length": 64,
+    "sha256": "ff9fd585dfa5dbc9099f703e6aa1e18431effd14bad0015d974d89341e2b628d"
+   }
+  },
+  {
+   "id": "switch_point",
+   "kind": "switch_point",
+   "site": "0x0B238C",
+   "about": "The last instruction of the game's pad read, once a frame in play: no switch's way can be running there.",
+   "window": {
+    "offset": 0,
+    "length": 64,
+    "sha256": "ed2509c0681b8ee0fab5594225b100fbb2b895713c59f7701cb9382169a0f3dc"
+   }
+  }
+ ],
+ "words": [
+  {
+   "name": "arcade_stage",
+   "address": "0x0B0A14",
+   "window": {
+    "offset": 0,
+    "length": 64,
+    "sha256": "b0bf46bcd1bfd600395d1522d0f1590c076608478420bf898ae59a956759c747"
+   },
+   "about": "The stage the arcade mode of the game starts on, which the game reads when it starts; the ROM holds 1. The program sets it (targets/pc/pc_scum.c)."
+  }
+ ],
+ "caves": [
+  {
+   "name": "health",
+   "base": "0x0BF000",
+   "about": "In zero padding before the animation data, which the game never reads. For a player object (slots 1 up to the game's own player count) the damage in d3 becomes zero; then the two instructions the hook left out, then rts.",
+   "code": [
+    "200A 0280 00FF FFFF 0480 00FF 8710 6516 E088 5280 0C80 0000 00FF 620A B039 00FF 9903 6402 7600",
+    {
+     "displaced": "health_compare"
+    },
+    "4E75"
+   ]
+  }
+ ]
+}

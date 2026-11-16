@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- Copyright (C) 2026 Marsupial Solutions LLC
+     SPDX-License-Identifier: GPL-3.0-or-later
+     The players' programs (pc_port.exe and pc_boot_image.exe) carry this: their code page is UTF-8, so their file names, command lines and the
+     names Windows gives them work in a folder with any letters. Without it, a folder name with letters outside the PC's language code page,
+     Cyrillic or Japanese on an English Windows, cannot be opened (measured). They also ask Windows for paths longer than 259 characters, which
+     Windows 10 (1607) and later give them when long paths are turned on for the PC. -->
+<assembly manifestVersion="1.0" xmlns="urn:schemas-microsoft-com:asm.v1">
+  <application xmlns="urn:schemas-microsoft-com:asm.v3">
+    <windowsSettings>
+      <activeCodePage xmlns="http://schemas.microsoft.com/SMI/2019/WindowsSettings">UTF-8</activeCodePage>
+      <longPathAware xmlns="http://schemas.microsoft.com/SMI/2016/WindowsSettings">true</longPathAware>
+    </windowsSettings>
+  </application>
+</assembly>
